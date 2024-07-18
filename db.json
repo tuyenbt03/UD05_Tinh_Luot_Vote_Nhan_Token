@@ -1,0 +1,68 @@
+{
+  "posts": [
+    {
+      "id": "Post001",
+      "title": "Linda (QE)",
+      "content": "Ae ai làm java dev ở đây cho mình xin kinh nghiệm phỏng vấn và môi trường thế nào ạ",
+      "userID": "",
+      "status": 1
+    },
+    {
+      "id": "Post002",
+      "title": "ng ty tự động toàn b",
+      "content": "Công ty tự động toàn bộ: tự bơi, tự lo, tự tìm hiểu. Không có ai chỉ dẫn cho bạn đâu, từ việc setup môi trường làm việc, kiến thức business của dự án. Mặc dù dự án làm hơn 20 năm, nếu bạn là người mới vào bạn sẽ phải tự tìm hiểu, tự mò từ việc set up môi trường, đến việc cấp account. Bạn tự tìm người để hỏi. Nói chung tất cả mọi việc đều tự bạn lo liệu lấy chứ không có sự hỗ trợ nào cả. Các bạn QE và Dev chú ý hé.",
+      "userID": "",
+      "status": 1
+    },
+    {
+      "id": "Post003",
+      "title": "aa",
+      "content": "Công ty tự động toàn bộ: tự bơi, tự lo, tự tìm hiểu. Không có ai chỉ dẫn cho bạn đâu, từ việc setup môi trường làm việc, kiến thức business của dự án. Mặc dù dự án làm hơn 20 năm, nếu bạn là người mới vào bạn sẽ phải tự tìm hiểu, tự mò từ việc set up môi trường, đến việc cấp account. Bạn tự tìm người để hỏi. Nói chung tất cả mọi việc đều tự bạn lo liệu lấy chứ không có sự hỗ trợ nào cả. Các bạn QE và Dev chú ý hé.Công ty tự động toàn bộ: tự bơi, tự lo, tự tìm hiểu. Không có ai chỉ dẫn cho bạn đâu, từ việc setup môi trường làm việc, kiến thức business của dự án. Mặc dù dự án làm hơn 20 năm, nếu bạn là người mới vào bạn sẽ phải tự tìm hiểu, tự mò từ việc set up môi trường, đến việc cấp account. Bạn tự tìm người để hỏi. Nói chung tất cả mọi việc đều tự bạn lo liệu lấy chứ không có sự hỗ trợ nào cả. Các bạn QE và Dev chú ý hé.Công ty tự động toàn bộ: tự bơi, tự lo, tự tìm hiểu. Không có ai chỉ dẫn cho bạn đâu, từ việc setup môi trường làm việc, kiến thức business của dự án. Mặc dù dự án làm hơn 20 năm, nếu bạn là người mới vào bạn sẽ phải tự tìm hiểu, tự mò từ việc set up môi trường, đến việc cấp account. Bạn tự tìm người để hỏi. Nói chung tất cả mọi việc đều tự bạn lo liệu lấy chứ không có sự hỗ trợ nào cả. Các bạn QE và Dev chú ý hé.",
+      "userID": "",
+      "status": 1
+    },
+    {
+      "id": "Post004",
+      "title": "All lists have their top margin removed",
+      "content": "All lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removed",
+      "userID": "",
+      "status": 1
+    },
+    {
+      "id": "Post005",
+      "title": "tt",
+      "content": "ttt",
+      "userID": "",
+      "status": 1
+    }
+  ],
+  "user": [
+    {
+      "id": "1",
+      "username": "tuyenpv",
+      "password": "123",
+      "role": "1",
+      "status": 1
+    }
+  ],
+  "interactPost": [
+    {
+      "id": "LikePost001mGHcS",
+      "name": "tuyenpv",
+      "like": 1,
+      "comment": "",
+      "type": 1,
+      "postId": "Post001",
+      "userId": 1
+    },
+    {
+      "id": "LikePost002rBJ49",
+      "name": "tuyenpv",
+      "like": 1,
+      "comment": "",
+      "type": 1,
+      "postId": "Post002",
+      "userId": 1
+    }
+  ]
+}
