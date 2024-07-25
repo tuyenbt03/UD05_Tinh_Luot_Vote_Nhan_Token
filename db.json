@@ -4,65 +4,240 @@
       "id": "Post001",
       "title": "Linda (QE)",
       "content": "Ae ai làm java dev ở đây cho mình xin kinh nghiệm phỏng vấn và môi trường thế nào ạ",
-      "userID": "",
-      "status": 1
+      "userId": "",
+      "status": 1,
+      "createAt": "2024-07-22 23:27:41"
     },
     {
-      "id": "Post002",
-      "title": "ng ty tự động toàn b",
-      "content": "Công ty tự động toàn bộ: tự bơi, tự lo, tự tìm hiểu. Không có ai chỉ dẫn cho bạn đâu, từ việc setup môi trường làm việc, kiến thức business của dự án. Mặc dù dự án làm hơn 20 năm, nếu bạn là người mới vào bạn sẽ phải tự tìm hiểu, tự mò từ việc set up môi trường, đến việc cấp account. Bạn tự tìm người để hỏi. Nói chung tất cả mọi việc đều tự bạn lo liệu lấy chứ không có sự hỗ trợ nào cả. Các bạn QE và Dev chú ý hé.",
-      "userID": "",
-      "status": 1
+      "id": "Post0056TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "title": "22",
+      "content": "222",
+      "userId": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "status": 1,
+      "createAt": "2024-07-22 23:27:41"
     },
     {
-      "id": "Post003",
-      "title": "aa",
-      "content": "Công ty tự động toàn bộ: tự bơi, tự lo, tự tìm hiểu. Không có ai chỉ dẫn cho bạn đâu, từ việc setup môi trường làm việc, kiến thức business của dự án. Mặc dù dự án làm hơn 20 năm, nếu bạn là người mới vào bạn sẽ phải tự tìm hiểu, tự mò từ việc set up môi trường, đến việc cấp account. Bạn tự tìm người để hỏi. Nói chung tất cả mọi việc đều tự bạn lo liệu lấy chứ không có sự hỗ trợ nào cả. Các bạn QE và Dev chú ý hé.Công ty tự động toàn bộ: tự bơi, tự lo, tự tìm hiểu. Không có ai chỉ dẫn cho bạn đâu, từ việc setup môi trường làm việc, kiến thức business của dự án. Mặc dù dự án làm hơn 20 năm, nếu bạn là người mới vào bạn sẽ phải tự tìm hiểu, tự mò từ việc set up môi trường, đến việc cấp account. Bạn tự tìm người để hỏi. Nói chung tất cả mọi việc đều tự bạn lo liệu lấy chứ không có sự hỗ trợ nào cả. Các bạn QE và Dev chú ý hé.Công ty tự động toàn bộ: tự bơi, tự lo, tự tìm hiểu. Không có ai chỉ dẫn cho bạn đâu, từ việc setup môi trường làm việc, kiến thức business của dự án. Mặc dù dự án làm hơn 20 năm, nếu bạn là người mới vào bạn sẽ phải tự tìm hiểu, tự mò từ việc set up môi trường, đến việc cấp account. Bạn tự tìm người để hỏi. Nói chung tất cả mọi việc đều tự bạn lo liệu lấy chứ không có sự hỗ trợ nào cả. Các bạn QE và Dev chú ý hé.",
-      "userID": "",
-      "status": 1
+      "id": "Post0036TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "title": "gggggggggg",
+      "content": "g",
+      "userId": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "status": 1,
+      "createAt": "2024-07-22 23:32:14"
     },
     {
-      "id": "Post004",
-      "title": "All lists have their top margin removed",
-      "content": "All lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removedAll lists have their top margin removed",
-      "userID": "",
-      "status": 1
+      "id": "Post0046TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "title": "ggg",
+      "content": "gg",
+      "userId": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "status": 1,
+      "createAt": "2024-07-24 22:43:47"
     },
     {
-      "id": "Post005",
+      "id": "Post0056TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "title": "ttt",
+      "content": "t",
+      "userId": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "status": 1,
+      "createAt": "2024-07-24 22:45:28"
+    },
+    {
+      "id": "Post0066TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "title": "ss",
+      "content": "ss",
+      "userId": "user2",
+      "status": 1,
+      "createAt": "2024-07-24 22:46:32"
+    },
+    {
+      "id": "Post0076TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "title": "22",
+      "content": "22",
+      "userId": "user2",
+      "status": 1,
+      "createAt": "2024-07-24 22:48:20"
+    },
+    {
+      "id": "Post0086TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "title": "ss",
+      "content": "aww",
+      "userId": "user2",
+      "status": 1,
+      "createAt": "2024-07-24 22:48:40"
+    },
+    {
+      "id": "Post0096TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "title": "nnn",
+      "content": "nn",
+      "userId": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "status": 1,
+      "createAt": "2024-07-24 23:10:18"
+    },
+    {
+      "id": "Post0106TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "title": "nnn21222",
+      "content": "nn2212",
+      "userId": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "status": 1,
+      "createAt": "2024-07-24 23:10:54"
+    },
+    {
+      "id": "Post0116TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "title": "22",
+      "content": "23",
+      "userId": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "status": 1,
+      "createAt": "2024-07-24 23:11:03"
+    },
+    {
+      "id": "Post012CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "title": "www",
+      "content": "www",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "status": 1,
+      "createAt": "2024-07-24 23:38:50"
+    },
+    {
+      "id": "Post013CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "title": "321312",
+      "content": "321231",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "status": 1,
+      "createAt": "2024-07-24 23:38:56"
+    },
+    {
+      "id": "Post014CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "title": "đ",
+      "content": "d",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "status": 1,
+      "createAt": "2024-07-25 00:05:37"
+    },
+    {
+      "id": "Post015CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "title": "bbb",
+      "content": "bbbbb",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "status": 1,
+      "createAt": "2024-07-25 12:05:55"
+    },
+    {
+      "id": "Post016CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
       "title": "tt",
       "content": "ttt",
-      "userID": "",
-      "status": 1
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "status": 1,
+      "createAt": "2024-07-25 12:06:05"
+    },
+    {
+      "id": "Post017CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEooXV",
+      "title": "ttttttt",
+      "content": "ttt",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "status": 1,
+      "createAt": "2024-07-25 12:17:55"
+    },
+    {
+      "id": "Post018CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEocGp",
+      "title": "s",
+      "content": "ss",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "status": 1,
+      "createAt": "2024-07-25 12:18:26"
+    },
+    {
+      "id": "Post019CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEon8N",
+      "title": "ee",
+      "content": "ee",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "status": 1,
+      "createAt": "2024-07-25 12:20:21"
+    },
+    {
+      "id": "Post020CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEozwf",
+      "title": "ss",
+      "content": "ss",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "status": 1,
+      "createAt": "2024-07-25 12:20:33"
+    },
+    {
+      "id": "Post021CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEoXRk",
+      "title": "sssss",
+      "content": "sss",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "status": 1,
+      "createAt": "2024-07-25 12:21:19"
+    },
+    {
+      "id": "Post022CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo9xG",
+      "title": "đ",
+      "content": "d",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "status": 1,
+      "createAt": "2024-07-25 12:21:33"
+    },
+    {
+      "id": "Post023CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEotMU",
+      "title": "fff",
+      "content": "ff",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "status": 1,
+      "createAt": "2024-07-25 12:21:54"
     }
   ],
-  "user": [
+  "users": [
     {
-      "id": "1",
+      "id": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "publickey": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
       "username": "tuyenpv",
-      "password": "123",
       "role": "1",
-      "status": 1
+      "status": 1,
+      "point": 30
+    },
+    {
+      "id": "user2",
+      "publickey": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "username": "tuyenph",
+      "role": "1",
+      "status": 1,
+      "point": 3
+    },
+    {
+      "id": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "publickey": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "username": "user a",
+      "role": 0,
+      "status": 1,
+      "point": 45
     }
   ],
   "interactPost": [
     {
-      "id": "LikePost001mGHcS",
-      "name": "tuyenpv",
-      "like": 1,
-      "comment": "",
-      "type": 1,
-      "postId": "Post001",
-      "userId": 1
+      "id": "LikePost0036TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ7t3zs",
+      "name": "publickey",
+      "postId": "Post0036TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "userId": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "createAt": "2024-07-22 23:35:15"
     },
     {
-      "id": "LikePost002rBJ49",
-      "name": "tuyenpv",
-      "like": 1,
-      "comment": "",
-      "type": 1,
-      "postId": "Post002",
-      "userId": 1
+      "id": "LikePost013CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEoJcfNs",
+      "postId": "Post013CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "createAt": "2024-07-24 23:39:09"
+    }
+  ],
+  "ranks": [
+    {
+      "id": "1",
+      "userId": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+      "totalPoint": 30,
+      "rankName": 1
+    },
+    {
+      "id": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "userId": "CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo",
+      "totalPoint": 50,
+      "rankName": 0
     }
   ]
 }

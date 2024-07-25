@@ -10,7 +10,7 @@ const DetailPost = () => {
     const [post, setPost] = useState();
 
     const fetchDetail = async () => {
-        console.log("param ", params);
+        // console.log("param ", params);
         let res = await PostService.getById(params.id);
         setPost({ ...res.data });
         console.log(res);

@@ -1,12 +1,10 @@
 import { Avatar, Button, Col, Image, Layout, Menu, Row, Typography } from "antd";
-import HeaderHome from "../../components/Header";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import { Link, Outlet } from "react-router-dom";
-import { MenuUnfoldOutlined, UserOutlined, WalletOutlined } from "@ant-design/icons";
 import Sider from "antd/es/layout/Sider";
 import { useState } from "react";
-import ButtonConnectWallet from "../../components/ButtonConnectWallet";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import ButtonConnectWallet from "../components/ButtonConnectWallet";
+import Util from "../util/Util";
 
 const HomePage = () => {
     const [collapsed, setCollapsed] = useState(false);
@@ -29,6 +27,38 @@ const HomePage = () => {
                 </Link>
             ),
         },
+        {
+            key: "3",
+            icon: <i className="fa-solid fa-chart-pie"></i>,
+            label: (
+                <span style={{ fontSize: 20 }} className="text-decoration-none" to={"/user"}>
+                    User
+                </span>
+            ),
+
+            children: [
+                {
+                    key: "3a",
+                    label: (
+                        <>
+                            <Link className="text-decoration-none" to={"/user"}>
+                                Profile
+                            </Link>
+                        </>
+                    ),
+                },
+                {
+                    key: "3b",
+                    label: (
+                        <>
+                            <Link className="text-decoration-none" to={"nhan-vien"}>
+                                NFT
+                            </Link>
+                        </>
+                    ),
+                },
+            ],
+        },
     ];
     return (
         <div>
@@ -47,23 +77,16 @@ const HomePage = () => {
                     }}
                 >
                     <div className="demo-logo-vertical ">
-                        {/* <img
+                        <img
                             className="img-fluid"
-                            src="https://kenh14cdn.com/Images/Uploaded/Share/2010/09/14/190810adidas02.jpg"
-                            alt=""
-                        /> */}
-                        <Image
-                            preview={false}
-                            src="https://earn.superteam.fun/assets/logo/logo.svg"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi6983Bl6tjEq6YT8fkuaRXL9JoV2stfdJPg&s"
                         />
-                        {/* <hr className="m-0" /> */}
-                        <br />
                         <br />
                     </div>
                     <Menu theme="light" mode="vertical" items={items} />
                     <br />
-                    <div>
-                        <WalletMultiButton style={{ fontSize: 22, margin: 5 }} />
+                    <div className="">
+                        <ButtonConnectWallet />
                     </div>
                 </Sider>
                 <Layout>

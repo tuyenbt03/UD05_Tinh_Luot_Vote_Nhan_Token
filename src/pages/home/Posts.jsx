@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Flex, Image, Row, Space, Typography } from "antd";
+import { Badge, Button, Card, Col, Flex, Image, Row, Space, Typography } from "antd";
 import { LikeOutlined, StarFilled } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import Util from "../../util/Util";
 import InteractPostService from "../../services/InteractPostService";
 import { toast } from "react-toastify";
+import getDateNow from "../../util/GetDateNow";
+import UserService from "../../services/UserService";
 
 function BodyLeft() {
     const navigate = useNavigate();
@@ -34,29 +36,40 @@ function BodyLeft() {
         fetchPosts();
     }, []);
 
-    const likePost = async (e) => {
-        InteractPostService.getByPostIdAndUserId(e.id, Util.User.id)
+    const likePost = async (post) => {
+        if(!Util.User){
+            toast.warning("Vui lòng kết nối ví phantom");
+            return;
+        }
+        InteractPostService.getByPostIdAndUserId(post.id, Util.User.id)
             .then((response) => {
                 if (response.data.length > 0) {
-                     toast.success("Đã like");
+                    toast.success("Đã like");
                     console.log("tồn tại");
                     return;
                 } else {
                     let endId = Util.generateRandomString(5);
                     const interactPost = {
-                        id: "Like" + e.id + endId,
+                        id: "Like" + post.id + endId,
                         name: Util.User.name,
-                        like: 1,
-                        comment: "",
-                        type: 1,
-                        postId: e.id,
-                        userId: Util.User.id,
+                        postId: post.id,
+                        userId: post.userId,
+                        createAt: getDateNow(),
                     };
                     InteractPostService.add(interactPost)
                         .then((res) => {
-                            console.log(res);
-                            // toast.success("Tạo post thành công");
-                            navigate("/");
+                            // console.log('res ',res.data);
+                            // lấy user => like thì point tăng 1
+                            UserService.getById(res.data.userId).then((response) => {
+                                // console.log(response.data);
+                                const user = {
+                                    ...response.data,
+                                    point: response.data.point + 1,
+                                };
+                                UserService.update(user.id, user).then((res) => {
+                                    console.log(res);
+                                });
+                            });
                         })
                         .catch((err) => {
                             toast.warning("Like thất bại ");
@@ -72,7 +85,7 @@ function BodyLeft() {
 
     return (
         <>
-            <div className="row row-cols-1 row-cols-md-3 g-4">
+            <div className="row row-cols-1 row-cols-md-3 g-3">
                 {posts?.map((element, idx) => (
                     <div className="col" key={idx}>
                         <div

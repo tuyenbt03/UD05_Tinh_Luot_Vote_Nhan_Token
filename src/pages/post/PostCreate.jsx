@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import PostService from "../../services/PostService";
+import Util from "../../util/Util";
+import getDateNow from "./../../util/GetDateNow";
+import UserService from "../../services/UserService";
+import RankService from "../../services/RankService";
 
 const schema = yup.object({
     title: yup.string().trim("nhập title").required("Cần nhập Title"),
@@ -23,7 +27,7 @@ const CreatePost = () => {
     const [data, setData] = useState();
     const fetchData = async () => {
         let res = await PostService.getPosts();
-        console.log(res);
+        // console.log(res);
         setData([...res.data]);
     };
     useEffect(() => {
@@ -31,11 +35,18 @@ const CreatePost = () => {
     }, []);
 
     const submitForm = async (values) => {
+        // kiểm tra xem user đã connect ví chưa
+        if (!Util.User) {
+            toast.warning("Vui lòng kết nối ví phantom");
+            return;
+        }
+
         const post = {
             ...values,
             id: "",
-            userID: "",
+            userId: Util.User.id,
             status: 1,
+            createAt: getDateNow(),
         };
         // Kiểm tra xem danh sách Post có phần tử không
         if (data.length > 0) {
@@ -47,12 +58,28 @@ const CreatePost = () => {
             // Nếu danh sách Post rỗng, sử dụng giá trị mặc định
             post.id = "Post001";
         }
+        post.id += Util.User.id + Util.generateRandomString(3);
 
-        console.log(post);
+        // tạo new post
         PostService.add(post)
             .then((res) => {
-                console.log(res);
+                console.log(res.data);
                 toast.success("Tạo post thành công");
+                // lấy user => tạo post tăng 5 điểm
+                UserService.getById(res.data.userId).then((response) => {
+                    // console.log(response.data);
+                    const user = {
+                        ...response.data,
+                        point: response.data.point + 5,
+                    };
+                    UserService.update(user.id, user).then((res) => {
+                        console.log('update point in user ',res);
+                    });
+                    // tăng total point trong rank + 5
+                    RankService.updateTotalPoint(user.id, 5).then((res) => {
+                        console.log("rank update totalPoint ", res);
+                    });
+                });
                 navigate("/");
             })
             .catch((err) => {
