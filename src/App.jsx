@@ -1,19 +1,22 @@
 import { ToastContainer } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/home/HomePage";
 import CreatePost from "./pages/post/PostCreate";
-import BodyHome from "./pages/home/BodyHome";
 import DetailPost from "./pages/post/PostDetail";
+import UserPage from "./pages/user/UserPage";
+import HomePage from './pages/HomePage';
+import BodyContent from "./pages/home/BodyContent";
 function App() {
     return (
         <>
             <ToastContainer theme="light" autoClose={800} />
             <Routes>
                 <Route path="/" element={<HomePage />}>
-                    <Route index element={<BodyHome />}></Route>
-                    <Route path="*" element={<BodyHome />}></Route>
+                    <Route index element={<BodyContent />}></Route>
+                    <Route path="*" element={<BodyContent />}></Route>
                     <Route path="post" element={<CreatePost />}></Route>
                     <Route path="post/:id" element={<DetailPost />}></Route>
+
+                    <Route path="user" element={<UserPage />}></Route>
                 </Route>
             </Routes>
         </>

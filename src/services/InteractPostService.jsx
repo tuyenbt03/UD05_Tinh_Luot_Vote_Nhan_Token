@@ -11,7 +11,7 @@ class InteractPostService {
     static getById(id) {
         return axios.get(`${API}/${id}`);
     }
-    // find postId - userId
+    // find by postId - userId
     static getByPostIdAndUserId(postId, userId) {
         return axios.get(`${API}?postId=${postId}&userId=${userId}`);
     }
@@ -20,7 +20,7 @@ class InteractPostService {
         return axios.post(API, data);
     }
 
-    // add
+    // update 
     static update(id, data) {
         return axios.put(`${API}/` + id, data);
     }
