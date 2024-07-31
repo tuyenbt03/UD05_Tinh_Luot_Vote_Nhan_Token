@@ -33,15 +33,15 @@ const HomePage = () => {
                 </Link>
             ),
         },
-        {
-            key: "4",
-            icon: <i className="fa-solid fa-chart-pie"></i>,
-            label: (
-                <Link style={{ fontSize: 20 }} className="text-decoration-none" to={"/nft"}>
-                    NFT
-                </Link>
-            ),
-        },
+        // {
+        //     key: "4",
+        //     icon: <i className="fa-solid fa-chart-pie"></i>,
+        //     label: (
+        //         <Link style={{ fontSize: 20 }} className="text-decoration-none" to={"/nft"}>
+        //             NFT
+        //         </Link>
+        //     ),
+        // },
         {
             key: "3",
             icon: <i className="fa-solid fa-chart-pie"></i>,

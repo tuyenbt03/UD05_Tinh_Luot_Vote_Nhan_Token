@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import Util from "../../util/Util";
 import { Avatar, Button, Card, Col, Input, List, Modal, Row, Typography } from "antd";
 import { toast } from "react-toastify";
-import UserService from "./../../services/UserService";
-import { useWallet } from "@solana/wallet-adapter-react";
+import UserService from "../../services/UserService";
 import { useNavigate, useParams } from "react-router-dom";
-import PostService from "./../../services/PostService";
-import ConvertPoint from "./Point";
+import PostService from "../../services/PostService";
+import ConvertPoint from "../user/Point";
+import SendSol from "./SendSol";
 
-const UserPage = () => {
+const UserClientPage = () => {
     const navigate = useNavigate();
     const params = useParams();
     const [userLogin, setUserLogin] = useState();
@@ -96,18 +96,7 @@ const UserPage = () => {
                         style={{ height: "100%", width: "100%", padding: "30px" }}
                         title={"Thông tin " + params.id}
                         extra={
-                            <Button
-                                onClick={() => {
-                                    if (!Util.User) {
-                                        toast.warning("Vui lòng kết nối ví phantom");
-                                        return;
-                                    }
-                                    setIsModalOpen(true);
-                                }}
-                                type="primary"
-                            >
-                                Edit
-                            </Button>
+                            <SendSol totalPoint={userLogin?.point} />
                         }
                     >
                         <Row justify="center" style={{ flex: 1 }}>
@@ -136,8 +125,7 @@ const UserPage = () => {
                                 <Typography.Title level={5}>: {userLogin?.point}</Typography.Title>
                             </Col>
                             <Col span={14}>
-                                {/* đổi poitn  */}
-                                <ConvertPoint totalPoint={userLogin?.point} />
+                                
                             </Col>
                         </Row>
                     </Card>
@@ -206,4 +194,4 @@ const UserPage = () => {
     );
 };
 
-export default UserPage;
+export default UserClientPage;

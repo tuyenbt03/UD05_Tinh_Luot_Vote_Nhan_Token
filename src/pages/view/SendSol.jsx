@@ -1,14 +1,15 @@
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { clusterApiUrl, Connection, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { Alert, Button, Card, Col, Input, InputNumber, Modal, Row, Space, Typography } from "antd";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import Util from "../../util/Util";
 
-const ConvertPoint = ({ totalPoint }) => {
+const SendSol = ({ totalPoint }) => {
     const { connected, publicKey, sendTransaction } = useWallet();
     const { connection } = useConnection();
-    // const [load, setLoad] = useState(true);
+    const [balance, setBalance] = useState(0);
     const [point, setPoint] = useState(0);
 
     // Open Modal
@@ -18,6 +19,9 @@ const ConvertPoint = ({ totalPoint }) => {
     };
 
     const sendSol = () => {
+        if (point == 0) {
+            return;
+        }
         var myHeaders = new Headers();
         myHeaders.append("x-api-key", "BMEGXzNX8HL-0T59");
         myHeaders.append("Content-Type", "application/json");
@@ -48,20 +52,15 @@ const ConvertPoint = ({ totalPoint }) => {
                 const network = clusterApiUrl("devnet");
                 const connection = new Connection(network);
 
-                // Deserialize the transaction
-                // const transaction = toTransaction(endcoded);
-                const transaction = Transaction.from(Buffer.from(endcoded, "base64"));
+                const provider = getProvider(); // see "Detecting the Provider"
 
-                // Sign and send the transaction
-                const signedTransaction = await window.phantom.solana.signTransaction(transaction);
-                const signature = await connection.sendRawTransaction(
-                    signedTransaction.serialize()
+                const transaction = Transaction.from(
+                    Buffer.from(result.result.encoded_transaction, "base64")
                 );
+                const { signature } = await provider.signAndSendTransaction(transaction);
+                await connection.getSignatureStatus(signature);
 
-                // Confirm the transaction
-                await connection.confirmTransaction(signature);
-                toast.success("chuyển thành công");
-
+                toast.success("thành công");
                 console.log("Transaction successful with signature:", signature);
             })
             .catch((error) => console.log("error", error));
@@ -70,19 +69,43 @@ const ConvertPoint = ({ totalPoint }) => {
     const Buffer = globalThis.Buffer;
     const toTransaction = (endcodeTransaction) =>
         Transaction.from(Uint8Array.from(atob(endcodeTransaction), (c) => c.charCodeAt(0)));
+    // Placeholder for your provider detection logic
+    const getProvider = () => {
+        if ("phantom" in window) {
+            const provider = window.phantom?.solana;
+            if (provider?.isPhantom) {
+                return provider;
+            }
+        }
+        window.open("https://phantom.app/", "_blank");
+    };
 
+    const getMyBalance = useCallback(async () => {
+        if (!publicKey) return setBalance(0);
+        let lamports = await connection.getBalance(publicKey);
+        return setBalance(lamports/10**9);
+    }, [connection, publicKey]);
+
+    useEffect(() => {
+        getMyBalance();
+    }, [getMyBalance]);
     return (
         <div>
             <Button
                 onClick={() => {
+                    if (!Util.User) {
+                        toast.warning("Vui lòng kết nối ví phantom");
+                        return;
+                    }
+                    setIsModalOpen(true);
                     setIsModalOpen(true);
                 }}
             >
-                Đổi
+                Send
             </Button>
 
             <Modal
-                title="Đổi point thành sol"
+                title="Send sol"
                 width={"50%"}
                 open={isModalOpen}
                 onCancel={handleCancel}
@@ -91,8 +114,8 @@ const ConvertPoint = ({ totalPoint }) => {
                 <Space direction="vertical" size={"middle"} style={{ width: "100%" }}>
                     <Row>
                         <Col span={24}>
-                            <Typography.Text>Point hiện có:</Typography.Text>
-                            <Typography.Text strong> {totalPoint} </Typography.Text>
+                            <Typography.Text>My balance:</Typography.Text>
+                            <Typography.Text strong> {balance} </Typography.Text>
                         </Col>
                     </Row>
                     <Row color="red">
@@ -137,4 +160,4 @@ const ConvertPoint = ({ totalPoint }) => {
     );
 };
 
-export default ConvertPoint;
+export default SendSol;

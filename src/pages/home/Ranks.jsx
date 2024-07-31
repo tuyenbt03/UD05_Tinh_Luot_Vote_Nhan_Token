@@ -1,8 +1,10 @@
 import { Avatar, List, Typography } from "antd";
 import { useEffect, useState } from "react";
 import RankService from "./../../services/RankService";
+import { useNavigate } from "react-router-dom";
 
 const BodyRight = () => {
+    const navigate = useNavigate();
     const [ranks, setRanks] = useState([]);
     const getALlRanks = async () => {
         const res = await RankService.getRanks();
@@ -44,7 +46,13 @@ const BodyRight = () => {
                                         textOverflow: "ellipsis",
                                     }}
                                 >
-                                    <a>{item.id}</a>
+                                    <a
+                                        onClick={() => {
+                                            navigate("/user/view/" + item.id);
+                                        }}
+                                    >
+                                        {item.id}
+                                    </a>
                                 </span>
                             }
                             description={"point " + item.totalPoint}

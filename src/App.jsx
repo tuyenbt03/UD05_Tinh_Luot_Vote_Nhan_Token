@@ -3,10 +3,11 @@ import { Route, Routes } from "react-router-dom";
 import CreatePost from "./pages/post/PostCreate";
 import DetailPost from "./pages/post/PostDetail";
 import UserPage from "./pages/user/UserPage";
-import HomePage from './pages/HomePage';
+import HomePage from "./pages/HomePage";
 import BodyContent from "./pages/home/BodyContent";
-import NFTPage from './pages/nft/NFTPage';
-import MyNFT from './pages/user/MyNFT';
+import NFTPage from "./pages/nft/NFTPage";
+import MyNFT from "./pages/user/MyNFT";
+import UserClientPage from './pages/view/ClientUser';
 function App() {
     return (
         <>
@@ -19,6 +20,7 @@ function App() {
                     <Route path="post/:id" element={<DetailPost />}></Route>
 
                     <Route path="user/:id" element={<UserPage />}></Route>
+                    <Route path="user/view/:id" element={<UserClientPage />}></Route>
                     <Route path="user/nft/:id" element={<MyNFT />}></Route>
 
                     <Route path="nft" element={<NFTPage />}></Route>
