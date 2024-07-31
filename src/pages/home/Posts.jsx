@@ -111,14 +111,14 @@ function BodyLeft() {
                             style={{ maxHeight: "600px", display: "flex", flexDirection: "column" }}
                         >
                             <div className="card-body" style={{ flex: 1 }}>
-                                <h2
+                                <h5
                                     className="card-title"
                                     onClick={() => {
                                         navigate("/post/" + element.id);
                                     }}
                                 >
                                     {element.title}
-                                </h2>
+                                </h5>
                                 <p
                                     className="card-text"
                                     style={{
