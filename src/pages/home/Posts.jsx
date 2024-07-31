@@ -7,10 +7,11 @@ import InteractPostService from "../../services/InteractPostService";
 import { toast } from "react-toastify";
 import getDateNow from "../../util/GetDateNow";
 import UserService from "../../services/UserService";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 function BodyLeft() {
     const navigate = useNavigate();
-
+    const { publicKey } = useWallet();
     const [posts, setPosts] = useState([]);
 
     const fetchPosts = async () => {
@@ -28,16 +29,41 @@ function BodyLeft() {
         fetchPosts();
     }, []);
 
+    useEffect(() => {
+        const loadLikes = async () => {
+            const arr = [];
+            let temp = null;
+            for (let index = 0; index < posts.length; index++) {
+                const element = posts[index];
+                const likes = await InteractPostService.getTotalLikeByPostId(element.id);
+                temp = {
+                    ...element,
+                    totalLike: likes,
+                };
+                // posts[index] = temp;
+                arr.push(temp);
+            }
+            setPosts([...arr]);
+        };
+
+        if (posts.length > 0) {
+            loadLikes();
+        }
+    }, [posts]);
+
     const likePost = async (post) => {
         if (!Util.User) {
             toast.warning("Vui lòng kết nối ví phantom");
             return;
         }
-        InteractPostService.getByPostIdAndUserId(post.id, Util.User.id)
+        console.log("usee ", post.id);
+        console.log("usee ", Util.User.id);
+        console.log("bbb ", publicKey);
+        InteractPostService.getByPostIdAndUserId(post.id, publicKey.toString())
             .then((response) => {
-                if (response.data.length > 0) {
+                if (response.length > 0) {
                     toast.success("Đã like");
-                    console.log("tồn tại");
+                    console.log("tồn tại", response.data);
                     return;
                 } else {
                     let endId = Util.generateRandomString(5);
@@ -45,23 +71,23 @@ function BodyLeft() {
                         id: "Like" + post.id + endId,
                         name: Util.User.name,
                         postId: post.id,
-                        userId: post.userId,
+                        userId: publicKey.toString(),
                         createAt: getDateNow(),
                     };
                     InteractPostService.add(interactPost)
                         .then((res) => {
-                            // console.log('res ',res.data);
+                            console.log("res ", res.data);
                             // lấy user => like thì point tăng 1
-                            UserService.getById(res.data.userId).then((response) => {
-                                // console.log(response.data);
-                                const user = {
-                                    ...response.data,
-                                    point: response.data.point + 1,
-                                };
-                                UserService.update(user.id, user).then((res) => {
-                                    console.log(res);
-                                });
-                            });
+                            // UserService.getById(res.data.userId).then((response) => {
+                            //     // console.log(response.data);
+                            //     const user = {
+                            //         ...response.data,
+                            //         point: response.data.point + 1,
+                            //     };
+                            //     UserService.update(user.id, user).then((res) => {
+                            //         console.log(res);
+                            //     });
+                            // });
                         })
                         .catch((err) => {
                             toast.warning("Like thất bại ");
@@ -115,14 +141,16 @@ function BodyLeft() {
                                     marginTop: "auto",
                                 }}
                             >
-                                <Button
-                                    onClick={() => {
-                                        likePost(element);
-                                    }}
-                                    size="large"
-                                    type="text"
-                                    icon={<LikeOutlined />}
-                                ></Button>
+                                <Badge color="blue" count={element.totalLike}>
+                                    <Button
+                                        onClick={() => {
+                                            likePost(element);
+                                        }}
+                                        size="large"
+                                        type="text"
+                                        icon={<LikeOutlined />}
+                                    ></Button>
+                                </Badge>
                             </div>
                         </div>
                     </div>

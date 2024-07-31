@@ -12,8 +12,17 @@ class InteractPostService {
         return axios.get(`${API}/${id}`);
     }
     // find by postId - userId
-    static getByPostIdAndUserId(postId, userId) {
-        return axios.get(`${API}?postId=${postId}&userId=${userId}`);
+    static async getByPostIdAndUserId(postId, userId) {
+        try {
+            const response = await this.getPosts(postId);
+            const res = response.data;
+            const found = res.find((e) => e.postId === postId && e.userId === userId);
+            return found ? [found] : [];
+        } catch (error) {
+            console.error("Error fetching and sorting posts:", error);
+            throw error;
+        }
+        // return axios.get(`${API}?postId=${postId}&userId=${userId}`);
     }
 
     // find total like by postId
