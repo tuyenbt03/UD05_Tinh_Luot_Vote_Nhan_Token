@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:5000/ranks";
+const API = "http://localhost:3000/ranks";
 
 class RankService {
     // get all

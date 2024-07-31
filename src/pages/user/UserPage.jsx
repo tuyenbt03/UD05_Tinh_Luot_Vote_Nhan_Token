@@ -1,27 +1,29 @@
 import { useEffect, useState } from "react";
 import Util from "../../util/Util";
-import { Button, Card, Col, Input, Modal, Row, Typography } from "antd";
+import { Avatar, Button, Card, Col, Input, List, Modal, Row, Typography } from "antd";
 import { toast } from "react-toastify";
 import UserService from "./../../services/UserService";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { useNavigate, useParams } from "react-router-dom";
+import PostService from "./../../services/PostService";
 
 const UserPage = () => {
-    const [userLogin, setUserLogin] = useState(null);
+    const navigate = useNavigate();
+    const params = useParams();
+    const [userLogin, setUserLogin] = useState();
+    const [posts, setPosts] = useState([]);
+
+    // const [load, setLoad] = useState(true);
     const [name, setName] = useState("");
-    const [load, setLoad] = useState(true);
     const handleChange = (e) => {
         setName(e.target.value.trim());
     };
-
     // modal
     // Open Modal lịch sử hóa đơn
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModalLSHD = () => {
-        setIsModalOpen(true);
-    };
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-
     const updateUserName = () => {
         if (name.trim().length == 0) {
             toast.warning("nhập user name");
@@ -39,7 +41,7 @@ const UserPage = () => {
                 Util.setUser(user); // cập nhật lại thông tin người dùng trong Util
                 setUserLogin(user); // cập nhật lại state
                 handleCancel();
-                setLoad(!load);
+                // setLoad(!load);
             })
             .catch((err) => {
                 toast.warning("Cập nhât thất bại ");
@@ -47,64 +49,140 @@ const UserPage = () => {
             });
     };
 
+    // lấy account user qua id params
     const fetchUser = async () => {
-        UserService.getById(Util.User?.id).then((response) => {
-            // console.log(response.data);
-            setUserLogin({
-                ...response.data,
+        // const user = await localStorage.getItem("user");
+        UserService.getById(params.id)
+            .then((response) => {
+                // console.log(response.data);
+                setUserLogin({
+                    ...response.data,
+                });
+            })
+            .catch((err) => {
+                console.log("err ", err);
             });
-        });
+    };
+
+    // lấy danh sách posts user qua id params
+    const fetchPosts = async () => {
+        PostService.getPostsByUserId(params.id)
+            .then((response) => {
+                setPosts([...response.data]);
+            })
+            .catch((err) => {
+                console.log("err ", err);
+            });
     };
     useEffect(() => {
+        fetchPosts();
         fetchUser();
     }, []);
 
+    console.log("post ", posts);
     return (
-        <div
-            style={{
-                height: "100vh",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-            }}
-        >
-            <Card
-                style={{ height: "100%", width: "75%", padding: "50px" }}
-                title={"Thông tin"}
-                extra={
-                    <Button
-                        onClick={() => {
-                            showModalLSHD();
-                        }}
-                        type="primary"
-                    >
-                        Edit
-                    </Button>
-                }
+        <div>
+            <button
+                onClick={() => {
+                    console.log(Util.User);
+                }}
             >
-                <Row justify="center" style={{ flex: 1 }}>
-                    <Col lg={4} md={24} sm={24}>
-                        <Typography.Title level={5}>Name: </Typography.Title>
-                    </Col>
-                    <Col lg={20} md={24} sm={20}>
-                        <Typography.Title level={5}>{userLogin?.username}</Typography.Title>
-                    </Col>
-                    <Col lg={4} md={24} sm={24}>
-                        <Typography.Title level={5}>Publickey: </Typography.Title>
-                    </Col>
-                    <Col lg={20} md={24} sm={20}>
-                        <Typography.Title level={5}>{userLogin?.publickey}</Typography.Title>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span={4}>
-                        <Typography.Title level={5}>Point: </Typography.Title>
-                    </Col>
-                    <Col span={20}>
-                        <Typography.Title level={5}>{userLogin?.point}</Typography.Title>
-                    </Col>
-                </Row>
-            </Card>
+                log
+            </button>
+            <Row gutter={[12, 5]}>
+                <Col span={24}>
+                    <Card
+                        style={{ height: "100%", width: "100%", padding: "30px" }}
+                        title={"Thông tin " + params.id}
+                        extra={
+                            <Button
+                                onClick={() => {
+                                    if (!Util.User) {
+                                        toast.warning("Vui lòng kết nối ví phantom");
+                                        return;
+                                    }
+                                    setIsModalOpen(true);
+                                }}
+                                type="primary"
+                            >
+                                Edit
+                            </Button>
+                        }
+                    >
+                        <Row justify="center" style={{ flex: 1 }}>
+                            <Col lg={4} md={24} sm={24}>
+                                <Typography.Title level={5}>Name </Typography.Title>
+                            </Col>
+                            <Col lg={20} md={24} sm={20}>
+                                <Typography.Title level={5}>
+                                    : {userLogin?.username}
+                                </Typography.Title>
+                            </Col>
+                            <Col lg={4} md={24} sm={24}>
+                                <Typography.Title level={5}>Publickey </Typography.Title>
+                            </Col>
+                            <Col lg={20} md={24} sm={20}>
+                                <Typography.Title level={5}>
+                                    : {userLogin?.publickey}
+                                </Typography.Title>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col span={4}>
+                                <Typography.Title level={5}>Point </Typography.Title>
+                            </Col>
+                            <Col span={20}>
+                                <Typography.Title level={5}>: {userLogin?.point}</Typography.Title>
+                            </Col>
+                        </Row>
+                    </Card>
+                </Col>
+                {/*  */}
+                <Col span={24}>
+                    <Card title={"Danh sách bài đăng"} style={{ width: "100%", padding: "30px" }}>
+                        {posts.length > 0 ? (
+                            <List
+                                itemLayout="vertical"
+                                pagination={{
+                                    position: "bottom",
+                                    onChange: (page) => {
+                                        console.log(page);
+                                    },
+                                    pageSize: 5,
+                                }}
+                                dataSource={posts}
+                                renderItem={(item, index) => (
+                                    <List.Item>
+                                        <List.Item.Meta
+                                            // avatar={
+                                            //     <Typography.Title level={5}>
+                                            //         {index + 1}
+                                            //     </Typography.Title>
+                                            // }
+                                            title={
+                                                <a
+                                                    onClick={() => {
+                                                        navigate("/post/" + item.id);
+                                                    }}
+                                                    style={{ textDecoration: "none" }}
+                                                >
+                                                    {item.title}
+                                                </a>
+                                            }
+                                            description={"" + item.createAt}
+                                        />
+                                        {/* {item.content} */}
+                                    </List.Item>
+                                )}
+                            />
+                        ) : (
+                            <Typography.Text>Không có bài đăng nào.</Typography.Text>
+                        )}
+                    </Card>
+                </Col>
+            </Row>
+
+            {/*  */}
 
             <Modal width={"50%"} open={isModalOpen} onCancel={handleCancel} footer={false}>
                 <Typography.Text>Username: </Typography.Text>

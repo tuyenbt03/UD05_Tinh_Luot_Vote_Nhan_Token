@@ -5,9 +5,15 @@ import Sider from "antd/es/layout/Sider";
 import { useState } from "react";
 import ButtonConnectWallet from "../components/ButtonConnectWallet";
 import Util from "../util/Util";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const HomePage = () => {
     const [collapsed, setCollapsed] = useState(false);
+    const { publicKey, connected, disconnect } = useWallet();
+    // const userLog = JSON.parse(localStorage.getItem("user"));
+    Util.loadUser();
+
+    // 
     const items = [
         {
             key: "1",
@@ -28,10 +34,19 @@ const HomePage = () => {
             ),
         },
         {
+            key: "4",
+            icon: <i className="fa-solid fa-chart-pie"></i>,
+            label: (
+                <Link style={{ fontSize: 20 }} className="text-decoration-none" to={"/nft"}>
+                    NFT
+                </Link>
+            ),
+        },
+        {
             key: "3",
             icon: <i className="fa-solid fa-chart-pie"></i>,
             label: (
-                <span style={{ fontSize: 20 }} className="text-decoration-none" to={"/user"}>
+                <span style={{ fontSize: 20 }} className="text-decoration-none">
                     User
                 </span>
             ),
@@ -41,7 +56,7 @@ const HomePage = () => {
                     key: "3a",
                     label: (
                         <>
-                            <Link className="text-decoration-none" to={"/user"}>
+                            <Link className="text-decoration-none" to={`/user/${publicKey}`}>
                                 Profile
                             </Link>
                         </>
@@ -51,7 +66,7 @@ const HomePage = () => {
                     key: "3b",
                     label: (
                         <>
-                            <Link className="text-decoration-none" to={"nhan-vien"}>
+                            <Link className="text-decoration-none" to={`/user/nft/${publicKey}`}>
                                 NFT
                             </Link>
                         </>

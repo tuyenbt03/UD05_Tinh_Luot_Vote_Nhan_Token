@@ -5,6 +5,8 @@ import DetailPost from "./pages/post/PostDetail";
 import UserPage from "./pages/user/UserPage";
 import HomePage from './pages/HomePage';
 import BodyContent from "./pages/home/BodyContent";
+import NFTPage from './pages/nft/NFTPage';
+import MyNFT from './pages/user/MyNFT';
 function App() {
     return (
         <>
@@ -16,7 +18,10 @@ function App() {
                     <Route path="post" element={<CreatePost />}></Route>
                     <Route path="post/:id" element={<DetailPost />}></Route>
 
-                    <Route path="user" element={<UserPage />}></Route>
+                    <Route path="user/:id" element={<UserPage />}></Route>
+                    <Route path="user/nft/:id" element={<MyNFT />}></Route>
+
+                    <Route path="nft" element={<NFTPage />}></Route>
                 </Route>
             </Routes>
         </>

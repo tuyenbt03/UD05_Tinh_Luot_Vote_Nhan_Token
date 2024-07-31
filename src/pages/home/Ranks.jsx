@@ -1,33 +1,17 @@
-import { Card, Typography } from "antd";
-import { Avatar, List } from "antd";
+import { Avatar, List, Typography } from "antd";
 import { useEffect, useState } from "react";
 import RankService from "./../../services/RankService";
-const data = [
-    {
-        title: "Ant Design Title 1",
-    },
-    {
-        title: "Ant Design Title 2",
-    },
-    {
-        title: "Ant Design Title 3",
-    },
-    {
-        title: "Ant Design Title 4",
-    },
-];
+
 const BodyRight = () => {
-    const [ranks, setRanks] = useState();
-
-    const getRanks = async () => {
-        const res = await RankService.getRanksSortedByPoints();
-        // console.log(res);
-        await setRanks([...res]);
+    const [ranks, setRanks] = useState([]);
+    const getALlRanks = async () => {
+        const res = await RankService.getRanks();
+        setRanks([...res.data]);
     };
-    useEffect(() => {
-        getRanks();
-    }, []);
 
+    useEffect(() => {
+        getALlRanks();
+    }, []);
     return (
         <>
             <List
@@ -35,6 +19,7 @@ const BodyRight = () => {
                     backgroundColor: "#ffffff", // Màu nền trắng
                     borderRadius: "5px", // Bo viền
                 }}
+                header={<div>Hạng</div>}
                 bordered
                 itemLayout="horizontal"
                 dataSource={ranks}
@@ -48,11 +33,7 @@ const BodyRight = () => {
                         }
                     >
                         <List.Item.Meta
-                            avatar={
-                                <Avatar
-                                    src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`}
-                                />
-                            }
+                            avatar={<Typography.Title level={4}>0{index + 1}</Typography.Title>}
                             title={
                                 <span
                                     style={{

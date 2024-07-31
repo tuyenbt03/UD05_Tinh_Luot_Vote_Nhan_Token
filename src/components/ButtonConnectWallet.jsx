@@ -6,11 +6,15 @@ import { useCallback, useEffect, useState } from "react";
 import Util from "../util/Util";
 import UserService from "../services/UserService";
 import RankService from "../services/RankService";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function ButtonConnectWallet() {
+    const navigate = useNavigate();
     const { connection } = useConnection();
-    const { publicKey, sendTransaction } = useWallet();
+    const { publicKey, sendTransaction, connected, disconnect } = useWallet();
     const [balance, setBalance] = useState(0);
+    const [initialLoad, setInitialLoad] = useState(true);
 
     // const getMyBalance = useCallback(async () => {
     //     if (!publicKey) return setBalance(0);
@@ -52,12 +56,10 @@ function ButtonConnectWallet() {
                             rankName: 0,
                         };
                         RankService.add(newRank).then((res) => {
-                            console.log('tạo rank cho user ',newRank);
+                            console.log("tạo rank cho user ", newRank);
                         });
                         Util.setUser(response.data);
                     });
-
-                    // tạo new user
                 });
         }
     };
@@ -68,11 +70,30 @@ function ButtonConnectWallet() {
         } else {
             Util.setUser(null);
         }
-    }, [publicKey]);
+    }, [publicKey, connected]);
+
+    useEffect(() => {
+        if (connected) {
+            // console.log("Wallet connected:", publicKey.toString());
+            // toast.success("kết nối thành công");
+
+            // Thực hiện hành động khi ví được kết nối
+
+            // Điều hướng chỉ khi không phải lần tải đầu tiên
+            // if (Util.User) {
+            //     navigate("/");
+            // }
+        } else {
+            console.log("Wallet disconnected");
+            // Thực hiện hành động khi ví bị ngắt kết nối
+        }
+        setInitialLoad(false);
+    }, [connected]);
 
     const handleLog = () => {
         console.log(Util.User);
     };
+
     return (
         <div>
             <WalletMultiButton

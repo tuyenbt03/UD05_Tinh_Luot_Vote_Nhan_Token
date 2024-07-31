@@ -1,8 +1,11 @@
 import React from 'react'
+import CreateNFT from './CreateNFT'
 
 const NFTPage = () => {
   return (
-    <div>NFTPage</div>
+    <div>
+      <CreateNFT />
+    </div>
   )
 }
 

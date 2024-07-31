@@ -78,9 +78,10 @@ const CreatePost = () => {
                     // tăng total point trong rank + 5
                     RankService.updateTotalPoint(user.id, 5).then((res) => {
                         console.log("rank update totalPoint ", res);
+                        navigate("/");
                     });
                 });
-                navigate("/");
+                
             })
             .catch((err) => {
                 toast.warning("Tạo post thất bại ");

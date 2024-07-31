@@ -11,18 +11,10 @@ import UserService from "../../services/UserService";
 function BodyLeft() {
     const navigate = useNavigate();
 
-    const [posts, setPosts] = useState([
-        {
-            id: 3,
-            title: "Đánh giá sản A",
-            content: "lorem 20",
-            userID: 1,
-            status: 1,
-        },
-    ]);
+    const [posts, setPosts] = useState([]);
 
     const fetchPosts = async () => {
-        fetch("http://localhost:5000/posts")
+        fetch("http://localhost:3000/posts")
             .then((res) => {
                 return res.json();
             })
@@ -37,7 +29,7 @@ function BodyLeft() {
     }, []);
 
     const likePost = async (post) => {
-        if(!Util.User){
+        if (!Util.User) {
             toast.warning("Vui lòng kết nối ví phantom");
             return;
         }
