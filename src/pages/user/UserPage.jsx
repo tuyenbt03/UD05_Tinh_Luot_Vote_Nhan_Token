@@ -6,6 +6,7 @@ import UserService from "./../../services/UserService";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate, useParams } from "react-router-dom";
 import PostService from "./../../services/PostService";
+import ConvertPoint from "./SendSol";
 
 const UserPage = () => {
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ const UserPage = () => {
         // update name
         UserService.update(user.id, user)
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 toast.success("Cập nhât thành công");
                 Util.setUser(user); // cập nhật lại thông tin người dùng trong Util
                 setUserLogin(user); // cập nhật lại state
@@ -79,7 +80,7 @@ const UserPage = () => {
         fetchUser();
     }, []);
 
-    console.log("post ", posts);
+    // console.log("post ", posts);
     return (
         <div>
             <button
@@ -131,8 +132,12 @@ const UserPage = () => {
                             <Col span={4}>
                                 <Typography.Title level={5}>Point </Typography.Title>
                             </Col>
-                            <Col span={20}>
+                            <Col span={6}>
                                 <Typography.Title level={5}>: {userLogin?.point}</Typography.Title>
+                            </Col>
+                            <Col span={14}>
+                            {/* đổi poitn  */}
+                                <ConvertPoint totalPoint={userLogin?.point} />
                             </Col>
                         </Row>
                     </Card>
@@ -197,6 +202,7 @@ const UserPage = () => {
                     </Col>
                 </Row>
             </Modal>
+            
         </div>
     );
 };

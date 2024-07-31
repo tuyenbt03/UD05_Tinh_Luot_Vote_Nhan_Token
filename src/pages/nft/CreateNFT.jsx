@@ -3,7 +3,7 @@ import { clusterApiUrl, Connection, Transaction } from "@solana/web3.js";
 import React, { useState } from "react";
 
 const CreateNFT = () => {
-    const { connected, publickey } = useWallet();
+    const { connected, publicKey } = useWallet();
     const [file, setFile] = useState(null);
 
     const handleCreate = () => {
@@ -14,7 +14,7 @@ const CreateNFT = () => {
         console.log(file);
         var formdata = new FormData();
         formdata.append("network", "devnet");
-        formdata.append("wallet", publickey);
+        formdata.append("wallet", publicKey);
         formdata.append("name", "FPL SHYFT NFT");
         formdata.append("symbol", "FPL");
         formdata.append("description", "FPL token Shyft makes Web3 so easy!");
@@ -24,7 +24,7 @@ const CreateNFT = () => {
         formdata.append("royalty", "5");
         formdata.append("file", file, "index.png");
         // formdata.append("data", file);
-        formdata.append("nft_receiver", publickey);
+        formdata.append("nft_receiver", publicKey);
         formdata.append(
             "service_charge",
             '{ "receiver": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ", "amount": 0.01}'
@@ -48,7 +48,7 @@ const CreateNFT = () => {
 
         var formdata = new FormData();
         formdata.append("network", "devnet");
-        formdata.append("creator_wallet", publickey);
+        formdata.append("creator_wallet", publicKey);
         formdata.append("name", "papaya");
         formdata.append("symbol", "P2");
         formdata.append("description", "papita");
@@ -57,7 +57,7 @@ const CreateNFT = () => {
         formdata.append("max_supply", "1");
         formdata.append("royalty", "5");
         formdata.append("image", file, "papaya.png");
-        formdata.append("fee_payer", publickey);
+        formdata.append("fee_payer", publicKey);
 
         var requestOptions = {
             method: "POST",

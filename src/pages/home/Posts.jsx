@@ -56,14 +56,14 @@ function BodyLeft() {
             toast.warning("Vui lòng kết nối ví phantom");
             return;
         }
-        console.log("usee ", post.id);
-        console.log("usee ", Util.User.id);
-        console.log("bbb ", publicKey);
+        // console.log("usee ", post.id);
+        // console.log("usee ", Util.User.id);
+        // console.log("bbb ", publicKey);
         InteractPostService.getByPostIdAndUserId(post.id, publicKey.toString())
             .then((response) => {
                 if (response.length > 0) {
                     toast.success("Đã like");
-                    console.log("tồn tại", response.data);
+                    // console.log("tồn tại", response.data);
                     return;
                 } else {
                     let endId = Util.generateRandomString(5);
@@ -76,7 +76,7 @@ function BodyLeft() {
                     };
                     InteractPostService.add(interactPost)
                         .then((res) => {
-                            console.log("res ", res.data);
+                            // console.log("res ", res.data);
                             // lấy user => like thì point tăng 1
                             // UserService.getById(res.data.userId).then((response) => {
                             //     // console.log(response.data);
