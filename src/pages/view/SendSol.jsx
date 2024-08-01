@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import Util from "../../util/Util";
 
-const SendSol = ({ totalPoint }) => {
+const SendSol = ({ totalPoint,viewPublicKey }) => {
     const { connected, publicKey, sendTransaction } = useWallet();
     const { connection } = useConnection();
     const [balance, setBalance] = useState(0);
@@ -26,14 +26,15 @@ const SendSol = ({ totalPoint }) => {
         myHeaders.append("x-api-key", "BMEGXzNX8HL-0T59");
         myHeaders.append("Content-Type", "application/json");
 
-        const fromPubKey = new PublicKey("CtEkPyqstJ8zeRRdnD6AnQPVjX1fDa5idAZ9C3SYyCEo");
+        const toPubKey = new PublicKey(viewPublicKey);
+        // const formPubKey = new PublicKey(viewPublicKey);
         var raw = JSON.stringify({
             network: "devnet",
-            from_address: fromPubKey,
-            to_address: new PublicKey(publicKey.toString()),
+            from_address: new PublicKey(publicKey.toString()),
+            to_address: toPubKey,
             amount: point / 10,
         });
-        console.log("raw", raw);
+        console.log("raw send ", raw);
 
         var requestOptions = {
             method: "POST",
@@ -60,8 +61,9 @@ const SendSol = ({ totalPoint }) => {
                 const { signature } = await provider.signAndSendTransaction(transaction);
                 await connection.getSignatureStatus(signature);
 
-                toast.success("thành công");
+                toast.success("Gửi thành công");
                 console.log("Transaction successful with signature:", signature);
+                setIsModalOpen(false);
             })
             .catch((error) => console.log("error", error));
     };
@@ -98,14 +100,13 @@ const SendSol = ({ totalPoint }) => {
                         return;
                     }
                     setIsModalOpen(true);
-                    setIsModalOpen(true);
                 }}
             >
                 Send
             </Button>
 
             <Modal
-                title="Send sol"
+                title={"Send sol " + viewPublicKey}
                 width={"50%"}
                 open={isModalOpen}
                 onCancel={handleCancel}

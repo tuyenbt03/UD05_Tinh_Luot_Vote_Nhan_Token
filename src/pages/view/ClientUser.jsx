@@ -95,9 +95,7 @@ const UserClientPage = () => {
                     <Card
                         style={{ height: "100%", width: "100%", padding: "30px" }}
                         title={"Thông tin " + params.id}
-                        extra={
-                            <SendSol totalPoint={userLogin?.point} />
-                        }
+                        extra={<SendSol  totalPoint={userLogin?.point} viewPublicKey={params.id} />}
                     >
                         <Row justify="center" style={{ flex: 1 }}>
                             <Col lg={4} md={24} sm={24}>
@@ -124,9 +122,7 @@ const UserClientPage = () => {
                             <Col span={6}>
                                 <Typography.Title level={5}>: {userLogin?.point}</Typography.Title>
                             </Col>
-                            <Col span={14}>
-                                
-                            </Col>
+                            <Col span={14}></Col>
                         </Row>
                     </Card>
                 </Col>
