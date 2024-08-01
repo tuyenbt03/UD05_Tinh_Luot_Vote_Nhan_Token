@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PostService from "../../services/PostService";
 import InteractPostService from "../../services/InteractPostService";
-import { CalendarOutlined, LikeOutlined } from "@ant-design/icons";
+import { CalendarOutlined, LikeOutlined, UserOutlined } from "@ant-design/icons";
 
 const DetailPost = () => {
     const navigate = useNavigate();
@@ -46,6 +46,18 @@ const DetailPost = () => {
                 <Row justify="start" align="middle" style={{ textAlign: "center", width: "100%" }}>
                     <Button icon={<LikeOutlined />} type="text" iconPosition={"start"}>
                         {likes}
+                    </Button>
+                </Row>
+                <Row justify="start" align="middle" style={{ textAlign: "center", width: "100%" }}>
+                    <Button
+                        onClick={() => {
+                            navigate("/user/view/" + post?.userId);
+                        }}
+                        icon={<UserOutlined />}
+                        type="text"
+                        iconPosition={"start"}
+                    >
+                        {post?.userId}
                     </Button>
                 </Row>
                 <hr className="border  border-2 opacity-50" />

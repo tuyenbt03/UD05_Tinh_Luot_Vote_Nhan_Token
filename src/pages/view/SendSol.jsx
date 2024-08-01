@@ -106,7 +106,7 @@ const SendSol = ({ totalPoint,viewPublicKey }) => {
             </Button>
 
             <Modal
-                title={"Send sol " + viewPublicKey}
+                title={"Tặng solana tới " + viewPublicKey}
                 width={"50%"}
                 open={isModalOpen}
                 onCancel={handleCancel}
@@ -132,7 +132,7 @@ const SendSol = ({ totalPoint,viewPublicKey }) => {
                     </Row>
                     <Row>
                         <Col span={24}>
-                            <Typography.Text>Point đổi </Typography.Text>
+                            <Typography.Text>Point gửi </Typography.Text>
                             <InputNumber
                                 placeholder="max = 50"
                                 step={5}

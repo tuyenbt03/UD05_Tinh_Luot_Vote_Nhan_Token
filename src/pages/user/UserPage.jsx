@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Util from "../../util/Util";
-import { Avatar, Button, Card, Col, Input, List, Modal, Row, Typography } from "antd";
+import { Alert, Avatar, Button, Card, Col, Input, List, Modal, Row, Typography } from "antd";
 import { toast } from "react-toastify";
 import UserService from "./../../services/UserService";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -158,24 +158,25 @@ const UserPage = () => {
                                 dataSource={posts}
                                 renderItem={(item, index) => (
                                     <List.Item>
-                                        <List.Item.Meta
-                                            // avatar={
-                                            //     <Typography.Title level={5}>
-                                            //         {index + 1}
-                                            //     </Typography.Title>
-                                            // }
-                                            title={
-                                                <a
-                                                    onClick={() => {
-                                                        navigate("/post/" + item.id);
-                                                    }}
-                                                    style={{ textDecoration: "none" }}
-                                                >
-                                                    {item.title}
-                                                </a>
+                                        <Alert
+                                            message={
+                                                <List.Item.Meta
+                                                    title={
+                                                        <a
+                                                            onClick={() => {
+                                                                navigate("/post/" + item.id);
+                                                            }}
+                                                            style={{ textDecoration: "none" }}
+                                                        >
+                                                            {item.title}
+                                                        </a>
+                                                    }
+                                                    description={"" + item.createAt}
+                                                />
                                             }
-                                            description={"" + item.createAt}
+                                            type="info"
                                         />
+
                                         {/* {item.content} */}
                                     </List.Item>
                                 )}
