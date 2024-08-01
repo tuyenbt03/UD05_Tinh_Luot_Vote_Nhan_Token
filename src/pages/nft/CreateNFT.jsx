@@ -80,7 +80,7 @@ const CreateNFT = () => {
         console.log(file);
         var formdata = new FormData();
         formdata.append("network", "devnet");
-        formdata.append("wallet", publickey);
+        formdata.append("wallet", publicKey);
         formdata.append("name", "FPL SHYFT NFT");
         formdata.append("symbol", "FPL");
         formdata.append("description", "FPL token Shyft makes Web3 so easy!");
@@ -90,7 +90,7 @@ const CreateNFT = () => {
         formdata.append("royalty", "5");
         formdata.append("file", file, "index.png");
         // formdata.append("data", file);
-        formdata.append("nft_receiver", publickey);
+        formdata.append("nft_receiver", publicKey);
         formdata.append(
             "service_charge",
             '{ "receiver": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ", "amount": 0.01}'
@@ -167,23 +167,95 @@ const CreateNFT = () => {
     // Kiểm tra và sử dụng Buffer
     const Buffer = globalThis.Buffer;
 
+    // const handleCreateMetadata = async () => {
+    //     try {
+    //         const myHeaders = new Headers();
+    //         myHeaders.append("x-api-key", "BMEGXzNX8HL-0T59");
+    //         myHeaders.append("Content-Type", "application/json");
+
+    //         const raw = JSON.stringify({
+    //             network: "devnet",
+    //             metadata_uri:
+    //                 "https://brown-loyal-stoat-734.mypinata.cloud/ipfs/QmR5Tyx3MvpiCKtjTVC4wVzRigpujCv9bnvQKU4ZMQzN5N",
+    //             receiver: "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+    //             max_supply: 0,
+    //             "fee_payer": "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+    //             service_charge: {
+    //                 receiver: "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+    //                 amount: 0.01,
+    //             },
+    //             priority_fee: 100,
+    //         });
+
+    //         const requestOptions = {
+    //             method: "POST",
+    //             headers: myHeaders,
+    //             body: raw,
+    //             redirect: "follow",
+    //         };
+
+    //         const response = await fetch(
+    //             "https://api.shyft.to/sol/v1/nft/create_from_metadata",
+    //             requestOptions
+    //         );
+    //         const result = await response.json();
+
+    //         // const encodedTransaction = result.result.encoded_transaction;
+    //         console.log(result.result);
+
+    //         const provider = getProvider(); // see "Detecting the Provider"
+    //         if (!provider) {
+    //             throw new Error("Provider not found");
+    //         }
+    //         try {
+    //             const resp = await provider.connect();
+    //             console.log(resp.publicKey.toString());
+    //         } catch (err) {
+    //             console.error("Provider connection error:", err);
+    //         }
+
+    //         const network = clusterApiUrl("devnet");
+    //         const connection = new Connection(network);
+
+    //         // Deserialize the transaction
+    //         const transaction = Transaction.from(
+    //             Buffer.from(result.result.encoded_transaction, "base64")
+    //         );
+
+    //         // // Sign the transaction
+    //         // const signedTransaction = await provider.signTransaction(transaction);
+
+    //         // const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+
+    //         const { signature } = await provider.signAndSendTransaction(transaction);
+    //         await connection.getSignatureStatus(signature);
+
+    //         console.log("Transaction successful with signature:", signature);
+    //     } catch (error) {
+    //         console.log("lỗi err ");
+    //         console.error("Error:", error);
+    //     }
+    // };
+
     const handleCreateMetadata = async () => {
         try {
             const myHeaders = new Headers();
             myHeaders.append("x-api-key", "BMEGXzNX8HL-0T59");
             myHeaders.append("Content-Type", "application/json");
 
-            const raw = JSON.stringify({
+            var raw = JSON.stringify({
                 network: "devnet",
                 metadata_uri:
                     "https://brown-loyal-stoat-734.mypinata.cloud/ipfs/QmR5Tyx3MvpiCKtjTVC4wVzRigpujCv9bnvQKU4ZMQzN5N",
-                receiver: "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
                 max_supply: 0,
+                // collection_address: "3F3G122hfRQ6E7aRQLhdXvabxtfhGHF89UVLvHR4pmn9",
+                receiver: "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
+                fee_payer: "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
                 service_charge: {
                     receiver: "6TdrBtkcdexB22bNytCgde67zx9cnVBoTze4MsZogkaZ",
                     amount: 0.01,
                 },
-                // priority_fee: 100,
+                priority_fee: 100,
             });
 
             const requestOptions = {
@@ -200,7 +272,7 @@ const CreateNFT = () => {
             const result = await response.json();
 
             // const encodedTransaction = result.result.encoded_transaction;
-            // console.log(encodedTransaction);
+            console.log(result.result);
 
             const provider = getProvider(); // see "Detecting the Provider"
             if (!provider) {
@@ -235,7 +307,6 @@ const CreateNFT = () => {
             console.error("Error:", error);
         }
     };
-
     // Placeholder for your provider detection logic
     const getProvider = () => {
         if ("phantom" in window) {
