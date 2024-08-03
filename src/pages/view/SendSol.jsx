@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import Util from "../../util/Util";
 
-const SendSol = ({ totalPoint,viewPublicKey }) => {
+const SendSol = ({ totalPoint, viewPublicKey }) => {
     const { connected, publicKey, sendTransaction } = useWallet();
     const { connection } = useConnection();
     const [balance, setBalance] = useState(0);
@@ -16,6 +16,21 @@ const SendSol = ({ totalPoint,viewPublicKey }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleCancel = () => {
         setIsModalOpen(false);
+    };
+
+    // Kiểm tra và sử dụng Buffer
+    const Buffer = globalThis.Buffer;
+    const toTransaction = (endcodeTransaction) =>
+        Transaction.from(Uint8Array.from(atob(endcodeTransaction), (c) => c.charCodeAt(0)));
+    // Placeholder for your provider detection logic
+    const getProvider = () => {
+        if ("phantom" in window) {
+            const provider = window.phantom?.solana;
+            if (provider?.isPhantom) {
+                return provider;
+            }
+        }
+        window.open("https://phantom.app/", "_blank");
     };
 
     const sendSol = () => {
@@ -61,38 +76,83 @@ const SendSol = ({ totalPoint,viewPublicKey }) => {
                 const { signature } = await provider.signAndSendTransaction(transaction);
                 await connection.getSignatureStatus(signature);
 
-                toast.success("Gửi thành công");
-                console.log("Transaction successful with signature:", signature);
                 setIsModalOpen(false);
+                // toast.success("Gửi thành công");
+                console.log("Transaction successful with signature:", signature);
+                const transactionUrl = `https://translator.shyft.to/tx/${signature}?cluster=devnet`;
+                const transactionUr2 = `https://explorer.solana.com/tx/${signature}?cluster=devnet`;
+                Swal.fire({
+                    text: "Send thành công!",
+                    footer: '<span id="view-transaction" style="cursor: pointer; color: #3085d6;">View transaction</span>',
+                    icon: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "View transaction",
+                    didOpen: () => {
+                        document.getElementById("view-transaction").onclick = () => {
+                            window.open(transactionUr2, "_blank"); // Mở link trong tab mới
+                            Swal.close(); // Đóng thông báo
+                        };
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.open(transactionUrl, "_blank"); // Mở link trong tab mới
+                        Swal.close();
+                    }
+                });
+
+                //
             })
             .catch((error) => console.log("error", error));
     };
-    // Kiểm tra và sử dụng Buffer
-    const Buffer = globalThis.Buffer;
-    const toTransaction = (endcodeTransaction) =>
-        Transaction.from(Uint8Array.from(atob(endcodeTransaction), (c) => c.charCodeAt(0)));
-    // Placeholder for your provider detection logic
-    const getProvider = () => {
-        if ("phantom" in window) {
-            const provider = window.phantom?.solana;
-            if (provider?.isPhantom) {
-                return provider;
+
+    // const getMyBalance = useCallback(async () => {
+    //     if (!publicKey) return setBalance(0);
+    //     let lamports = await connection.getBalance(publicKey);
+    //     return setBalance(lamports/10**9);
+    // }, [connection, publicKey]);
+
+    // useEffect(() => {
+    //     getMyBalance();
+    // }, [getMyBalance]);
+
+    const viewTransaction = () => {
+        const signature =
+            "5WqHAiA6zvfNVoNYtoFwbq44XreSBVgHHu2j3xU39tiQGwUpJt28uBHq9B6F7yTx5FcTkfneCtxYEN5t9UjrTjzL";
+        const transactionUrl = `https://translator.shyft.to/tx/${signature}?cluster=devnet`;
+        const transactionUr2 = `https://explorer.solana.com/tx/${signature}?cluster=devnet`;
+        Swal.fire({
+            // title: "Are you sure?",
+            text: "Send thành công!",
+            footer: '<span id="view-transaction" style="cursor: pointer; color: #3085d6;">View transaction</span>',
+            icon: "success",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "View transaction",
+            didOpen: () => {
+                document.getElementById("view-transaction").onclick = () => {
+                    window.open(transactionUr2, "_blank"); // Mở link trong tab mới
+                    Swal.close(); // Đóng thông báo
+                };
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.open(transactionUrl, "_blank"); // Mở link trong tab mới
+                Swal.close(); // Đóng thông báo
             }
-        }
-        window.open("https://phantom.app/", "_blank");
+        });
     };
-
-    const getMyBalance = useCallback(async () => {
-        if (!publicKey) return setBalance(0);
-        let lamports = await connection.getBalance(publicKey);
-        return setBalance(lamports/10**9);
-    }, [connection, publicKey]);
-
-    useEffect(() => {
-        getMyBalance();
-    }, [getMyBalance]);
     return (
         <div>
+            {/* <Button
+                onClick={() => {
+                    viewTransaction();
+                }}
+            >
+                view tran
+            </Button> */}
             <Button
                 onClick={() => {
                     if (!Util.User) {
@@ -102,7 +162,7 @@ const SendSol = ({ totalPoint,viewPublicKey }) => {
                     setIsModalOpen(true);
                 }}
             >
-                Send
+                Tặng sol
             </Button>
 
             <Modal
@@ -113,12 +173,12 @@ const SendSol = ({ totalPoint,viewPublicKey }) => {
                 footer={false}
             >
                 <Space direction="vertical" size={"middle"} style={{ width: "100%" }}>
-                    <Row>
+                    {/* <Row>
                         <Col span={24}>
                             <Typography.Text>My balance:</Typography.Text>
                             <Typography.Text strong> {balance} </Typography.Text>
                         </Col>
-                    </Row>
+                    </Row> */}
                     <Row color="red">
                         <div className="alert alert-success w-100 mb-0" role="alert">
                             <Typography.Text>Giá trị quy đổi: </Typography.Text>
@@ -151,7 +211,7 @@ const SendSol = ({ totalPoint,viewPublicKey }) => {
                     <Col span={24}>
                         <div className="d-flex justify-content-end mt-2">
                             <Button onClick={sendSol} type="primary">
-                                Gửi sol
+                                Gửi
                             </Button>
                         </div>
                     </Col>
