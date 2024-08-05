@@ -73,34 +73,38 @@ const SendSol = ({ totalPoint, viewPublicKey }) => {
                 // const transaction = Transaction.from(
                 //     Buffer.from(result.result.encoded_transaction, "base64")
                 // );
-                const { signature } = await provider.signAndSendTransaction(transaction);
-                await connection.getSignatureStatus(signature);
 
-                setIsModalOpen(false);
-                // toast.success("Gửi thành công");
-                console.log("Transaction successful with signature:", signature);
-                const transactionUrl = `https://translator.shyft.to/tx/${signature}?cluster=devnet`;
-                const transactionUr2 = `https://explorer.solana.com/tx/${signature}?cluster=devnet`;
-                Swal.fire({
-                    text: "Send thành công!",
-                    footer: '<span id="view-transaction" style="cursor: pointer; color: #3085d6;">View transaction</span>',
-                    icon: "success",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "View transaction",
-                    didOpen: () => {
-                        document.getElementById("view-transaction").onclick = () => {
-                            window.open(transactionUr2, "_blank"); // Mở link trong tab mới
-                            Swal.close(); // Đóng thông báo
-                        };
-                    },
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.open(transactionUrl, "_blank"); // Mở link trong tab mới
-                        Swal.close();
-                    }
-                });
+                try {
+                    const { signature } = await provider.signAndSendTransaction(transaction);
+                    console.log("Transaction 111 with signature:", signature);
+                    await connection.getSignatureStatus(signature);
+                    setIsModalOpen(false);
+                    // toast.success("Gửi thành công");
+                    const transactionUrl = `https://translator.shyft.to/tx/${signature}?cluster=devnet`;
+                    const transactionUr2 = `https://explorer.solana.com/tx/${signature}?cluster=devnet`;
+                    Swal.fire({
+                        text: "Send thành công!",
+                        footer: '<span id="view-transaction" style="cursor: pointer; color: #3085d6;">View transaction</span>',
+                        icon: "success",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "View transaction",
+                        didOpen: () => {
+                            document.getElementById("view-transaction").onclick = () => {
+                                window.open(transactionUr2, "_blank"); // Mở link trong tab mới
+                                Swal.close(); // Đóng thông báo
+                            };
+                        },
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.open(transactionUrl, "_blank"); // Mở link trong tab mới
+                            Swal.close();
+                        }
+                    });
+                } catch {
+                    toast.error("Giao dịch thất bại");
+                }
 
                 //
             })
@@ -130,7 +134,7 @@ const SendSol = ({ totalPoint, viewPublicKey }) => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "View transaction",
+            confirmButtonText: "Xem giao dịch",
             didOpen: () => {
                 document.getElementById("view-transaction").onclick = () => {
                     window.open(transactionUr2, "_blank"); // Mở link trong tab mới
@@ -166,7 +170,7 @@ const SendSol = ({ totalPoint, viewPublicKey }) => {
             </Button>
 
             <Modal
-                title={"Tặng solana tới " + viewPublicKey}
+                title={"Tặng sol tới " + viewPublicKey}
                 width={"50%"}
                 open={isModalOpen}
                 onCancel={handleCancel}
@@ -194,10 +198,10 @@ const SendSol = ({ totalPoint, viewPublicKey }) => {
                         <Col span={24}>
                             <Typography.Text>Point gửi </Typography.Text>
                             <InputNumber
-                                placeholder="max = 50"
+                                placeholder="max = 100"
                                 step={5}
                                 min={0}
-                                max={50}
+                                max={100}
                                 style={{
                                     width: "100%",
                                 }}

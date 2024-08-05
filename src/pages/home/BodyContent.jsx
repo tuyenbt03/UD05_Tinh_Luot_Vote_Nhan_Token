@@ -13,6 +13,7 @@ function BodyContent() {
                     minHeight: "100vh", // Đặt chiều cao tối thiểu cho thẻ Card để bao phủ toàn bộ trang
                     display: "flex",
                     flexDirection: "column",
+                    backgroundColor: "#fffbff",
                 }}
             >
                 <Row gutter={16}>

@@ -88,7 +88,7 @@ const UserPage = () => {
                 <Col span={24}>
                     <Card
                         style={{ height: "100%", width: "100%", padding: "30px" }}
-                        title={"Thông tin " + params.id}
+                        title={"Thông tin "}
                         extra={
                             <Button
                                 onClick={() => {

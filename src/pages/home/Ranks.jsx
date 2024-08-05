@@ -37,6 +37,7 @@ const BodyRight = ({ load, setLoad }) => {
                                     }}
                                 >
                                     <a
+                                   
                                         onClick={() => {
                                             navigate("/user/view/" + item.id);
                                         }}

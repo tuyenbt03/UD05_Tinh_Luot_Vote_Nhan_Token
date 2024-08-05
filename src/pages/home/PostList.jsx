@@ -150,7 +150,8 @@ function PostList({ load, setLoad }) {
                         <List.Item.Meta
                             // avatar={<Avatar src={item.avatar} />}
                             title={
-                                <a
+                                <a 
+                                // style={{color:'#258acc'}}
                                     onClick={() => {
                                         navigate("/post/" + item.id);
                                     }}
